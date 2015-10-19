@@ -36,7 +36,7 @@ int main(int argc ,char *argv[])
 
 			/*窗口主体初始化设定*/
 	gtk_window_set_title(GTK_WINDOW(login_window),"用户登录");
-	gtk_window_set_usize(login_window,300,300);
+	gtk_widget_set_usize(login_window,300,200);
 	gtk_window_set_position(GTK_WINDOW(login_window),
 				GTK_WIN_POS_CENTER_ALWAYS);
 	
@@ -73,7 +73,7 @@ int main(int argc ,char *argv[])
 
 
 
-	gtk_widget_show_all();
+	gtk_widget_show_all(login_window);
 	gtk_main();	
 
 	return 0;
