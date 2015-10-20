@@ -10,22 +10,26 @@ int main(int argc ,char *argv[])
 	GtkWidget *login_table1;
 	GtkWidget *login_table2;
 	GtkWidget *login_table3;
+	GtkWidget *login_table4;
 	GtkWidget *login_ok_btn;
 	GtkWidget *login_cancel_btn;
 	GtkWidget *name_entry;
 	GtkWidget *pwd_entry;
 	GtkWidget *name_lable;
-        GtkWidget *pwd_lable;
+    GtkWidget *pwd_lable;
 	GtkWidget *login_lable;
+	GtkWidget *iden_radio_btn;
+	GSList *iden_group;
 
 	gtk_init(&argc,&argv);			//GTK初始化
 	
 	 		/*组件初始化*/
 	login_window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	login_table0=gtk_table_new(3,1,FALSE);
+	login_table0=gtk_table_new(4,1,FALSE);
 	login_table1=gtk_table_new(1,1,FALSE);
 	login_table2=gtk_table_new(3,2,FALSE);
-	login_table3=gtk_table_new(1,2,FALSE);
+	login_table3=gtk_table_new(1,3,FALSE);
+	login_table4=gtk_table_new(1,2,FALSE);
 	login_ok_btn=gtk_button_new_with_label("登录");
 	login_cancel_btn=gtk_button_new_with_label("退出");
 	name_entry=gtk_entry_new();
@@ -33,10 +37,11 @@ int main(int argc ,char *argv[])
 	name_lable=gtk_label_new("用户名");
 	pwd_lable=gtk_label_new("密码");
 	login_lable=gtk_label_new("登录信息");
+	
 
 			/*窗口主体初始化设定*/
 	gtk_window_set_title(GTK_WINDOW(login_window),"用户登录");
-	gtk_widget_set_usize(login_window,300,200);
+	gtk_widget_set_usize(login_window,300,300);
 	gtk_window_set_position(GTK_WINDOW(login_window),
 				GTK_WIN_POS_CENTER_ALWAYS);
 	
@@ -54,12 +59,25 @@ int main(int argc ,char *argv[])
                         (GtkAttachOptions)(0),5,5);
 	gtk_table_attach(GTK_TABLE(login_table2),pwd_entry,1,2,1,2,(GtkAttachOptions)(0),
                         (GtkAttachOptions)(0),5,5);
+            /*身份选项*/
+            
+    iden_radio_btn=gtk_radio_button_new_with_label(NULL,"学生");
+    gtk_table_attach(GTK_TABLE(login_table3),iden_radio_btn,0,1,0,1,(GtkAttachOptions)(0),
+                        (GtkAttachOptions)(0),5,5);
+    iden_group=gtk_radio_button_group(GTK_RADIO_BUTTON(iden_radio_btn));
+    iden_radio_btn=gtk_radio_button_new_with_label(iden_group,"教师");
+    gtk_table_attach(GTK_TABLE(login_table3),iden_radio_btn,0,1,1,2,(GtkAttachOptions)(0),
+                        (GtkAttachOptions)(0),5,5);
+    iden_group=gtk_radio_button_group(GTK_RADIO_BUTTON(iden_radio_btn));                    
+    iden_radio_btn=gtk_radio_button_new_with_label(iden_group,"管理员");
+    gtk_table_attach(GTK_TABLE(login_table3),iden_radio_btn,0,1,2,3,(GtkAttachOptions)(0),
+                        (GtkAttachOptions)(0),0,0);
 
 			/*登录选项*/
 
-	gtk_table_attach(GTK_TABLE(login_table3),login_ok_btn,0,1,0,1,(GtkAttachOptions)(0),
+	gtk_table_attach(GTK_TABLE(login_table4),login_ok_btn,0,1,0,1,(GtkAttachOptions)(0),
                         (GtkAttachOptions)(0),5,5);
-	gtk_table_attach(GTK_TABLE(login_table3),login_cancel_btn,1,2,0,1,(GtkAttachOptions)(0),
+	gtk_table_attach(GTK_TABLE(login_table4),login_cancel_btn,1,2,0,1,(GtkAttachOptions)(0),
                         (GtkAttachOptions)(0),5,5);
 	
 			/*把各个表格加载进窗口*/
@@ -68,9 +86,11 @@ int main(int argc ,char *argv[])
                         (GtkAttachOptions)(0),5,5);
 	gtk_table_attach(GTK_TABLE(login_table0),login_table2,0,1,1,2,(GtkAttachOptions)(0),
                         (GtkAttachOptions)(0),5,5);
-	gtk_table_attach(GTK_TABLE(login_table0),login_table3,0,1,2,3,(GtkAttachOptions)(0),
+    gtk_table_attach(GTK_TABLE(login_table0),login_table3,0,1,2,3,(GtkAttachOptions)(0),
                         (GtkAttachOptions)(0),5,5);
-
+	gtk_table_attach(GTK_TABLE(login_table0),login_table4,0,1,3,4,(GtkAttachOptions)(0),
+                        (GtkAttachOptions)(0),5,5);
+	
 
 
 	gtk_widget_show_all(login_window);
